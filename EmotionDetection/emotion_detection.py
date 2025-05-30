@@ -8,6 +8,16 @@ def emotion_detector(text_to_analyze):
     
     response_api =requests.post(url, headers=headers, json=input)
     
+    if response_api.status_code == 400:
+       return {
+        'anger': None,
+        'disgust': None,
+        'fear': None,
+        'joy': None,
+        'sadness': None,
+        'dominant_emotion': None
+    }
+    
     response_json = response_api.json()
     
     emotions_data = response_json['emotionPredictions'][0]['emotion']
